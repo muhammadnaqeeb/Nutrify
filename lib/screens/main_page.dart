@@ -21,7 +21,24 @@ class _MainPageState extends State<MainPage> {
       const Center(child: Text("will replace with screen latter 5")),
     ];
     return Scaffold(
-        appBar: AppBar(),
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: const Text(
+            "Nutrify",
+            style: TextStyle(color: Colors.black),
+          ),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Icon(
+                Icons.calendar_today_outlined,
+                color: Colors.black,
+              ),
+            )
+          ],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: c_index,
@@ -38,11 +55,11 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
               icon: Column(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.home,
                     size: 28,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   CircleAvatar(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutrify/screens/get_nutrition_screen.dart';
 import 'package:nutrify/screens/home_screen.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 
@@ -16,7 +17,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final screens = [
       HomeScreen(),
-      const Center(child: Text("will replace with screen latter 2")),
+      GetNutritionScreen(),
       const Center(child: Text("will replace with screen latter 3")),
       const Center(child: Text("will replace with screen latter 4")),
       const Center(child: Text("will replace with screen latter 5")),

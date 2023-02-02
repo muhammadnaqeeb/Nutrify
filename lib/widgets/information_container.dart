@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class InformationContainer extends StatelessWidget {
   final String title;
   final String emoji;
-  final int value;
+  dynamic value;
   final String type;
   final Color color;
   final Color? secondaryColor;
 
-  const InformationContainer({
+  InformationContainer({
     Key? key,
     required this.title,
     required this.emoji,

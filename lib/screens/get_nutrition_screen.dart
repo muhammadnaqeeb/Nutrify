@@ -18,14 +18,19 @@ class _GetNutritionScreenState extends State<GetNutritionScreen> {
   // }
 
   var FoodDataDecoded;
+  int show = 0;
+  void ShowProgress() {
+    setState(() {
+      show = 1;
+    });
+  }
+
   Future getFoodData(String query) async {
-    const Center(
-      child: CircularProgressIndicator(
-        color: Colors.black,
-      ),
-    );
     NetworkHelper networkHelper = NetworkHelper(query);
     FoodDataDecoded = await networkHelper.getData();
+    print(
+        "______${FoodDataDecoded['totalWeight']} ________________________________________");
+    show = 0;
     setState(() {});
   }
 
@@ -41,6 +46,9 @@ class _GetNutritionScreenState extends State<GetNutritionScreen> {
             "Food Analysis",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
           ),
+          const SizedBox(
+            height: 4,
+          ),
           const Text(
               "Analysis of food item based on the nutrition present in it."),
           const SizedBox(
@@ -55,8 +63,13 @@ class _GetNutritionScreenState extends State<GetNutritionScreen> {
               ),
               suffixIcon: IconButton(
                 color: Colors.black,
-                icon: const Icon(Icons.send_rounded),
+                icon: show == 0
+                    ? const Icon(Icons.send_rounded)
+                    : const CircularProgressIndicator(
+                        color: Colors.black,
+                      ),
                 onPressed: () async {
+                  ShowProgress();
                   await getFoodData(controller.text);
                 },
               ),
@@ -73,7 +86,7 @@ class _GetNutritionScreenState extends State<GetNutritionScreen> {
           const SizedBox(
             height: 20,
           ),
-          FoodDataDecoded != null
+          (FoodDataDecoded != null && FoodDataDecoded["totalWeight"] > 0)
               ? Column(
                   children: [
                     Row(
@@ -181,11 +194,9 @@ class _GetNutritionScreenState extends State<GetNutritionScreen> {
                   children: const [
                     Text(
                       "Enter food and it's quantity, like",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     Text("    ⚈ 1 cup rice"),
                     Text("    ⚈ 10 oz chickpeas, etc."),
@@ -194,7 +205,7 @@ class _GetNutritionScreenState extends State<GetNutritionScreen> {
           const SizedBox(
             height: 20,
           ),
-          FoodDataDecoded != null
+          (FoodDataDecoded != null && FoodDataDecoded["totalWeight"] > 0)
               ? Align(
                   alignment: Alignment.center,
                   child: ElevatedButton(
